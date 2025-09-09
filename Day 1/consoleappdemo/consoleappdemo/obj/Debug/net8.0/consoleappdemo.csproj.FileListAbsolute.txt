@@ -1,0 +1,14 @@
+C:\Users\lenovo\OneDrive\Desktop\hyaaa\inventory\consoleappdemo\consoleappdemo\bin\Debug\net8.0\consoleappdemo.exe
+C:\Users\lenovo\OneDrive\Desktop\hyaaa\inventory\consoleappdemo\consoleappdemo\bin\Debug\net8.0\consoleappdemo.deps.json
+C:\Users\lenovo\OneDrive\Desktop\hyaaa\inventory\consoleappdemo\consoleappdemo\bin\Debug\net8.0\consoleappdemo.runtimeconfig.json
+C:\Users\lenovo\OneDrive\Desktop\hyaaa\inventory\consoleappdemo\consoleappdemo\bin\Debug\net8.0\consoleappdemo.dll
+C:\Users\lenovo\OneDrive\Desktop\hyaaa\inventory\consoleappdemo\consoleappdemo\bin\Debug\net8.0\consoleappdemo.pdb
+C:\Users\lenovo\OneDrive\Desktop\hyaaa\inventory\consoleappdemo\consoleappdemo\obj\Debug\net8.0\consoleappdemo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lenovo\OneDrive\Desktop\hyaaa\inventory\consoleappdemo\consoleappdemo\obj\Debug\net8.0\consoleappdemo.AssemblyInfoInputs.cache
+C:\Users\lenovo\OneDrive\Desktop\hyaaa\inventory\consoleappdemo\consoleappdemo\obj\Debug\net8.0\consoleappdemo.AssemblyInfo.cs
+C:\Users\lenovo\OneDrive\Desktop\hyaaa\inventory\consoleappdemo\consoleappdemo\obj\Debug\net8.0\consoleappdemo.csproj.CoreCompileInputs.cache
+C:\Users\lenovo\OneDrive\Desktop\hyaaa\inventory\consoleappdemo\consoleappdemo\obj\Debug\net8.0\consoleappdemo.dll
+C:\Users\lenovo\OneDrive\Desktop\hyaaa\inventory\consoleappdemo\consoleappdemo\obj\Debug\net8.0\refint\consoleappdemo.dll
+C:\Users\lenovo\OneDrive\Desktop\hyaaa\inventory\consoleappdemo\consoleappdemo\obj\Debug\net8.0\consoleappdemo.pdb
+C:\Users\lenovo\OneDrive\Desktop\hyaaa\inventory\consoleappdemo\consoleappdemo\obj\Debug\net8.0\consoleappdemo.genruntimeconfig.cache
+C:\Users\lenovo\OneDrive\Desktop\hyaaa\inventory\consoleappdemo\consoleappdemo\obj\Debug\net8.0\ref\consoleappdemo.dll
