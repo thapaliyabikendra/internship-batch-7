@@ -157,6 +157,24 @@ namespace assignment_two
 
             #endregion
 
+            //bonus
+            #region calculate age in hours and minutes
+            Console.WriteLine();
+            Console.Write("Enter your age date :");
+            birthInput = Console.ReadLine();
+
+            if (dateAgeFormat) 
+            {
+                DateTime dt = DateTime.Now;
+                TimeSpan ageTs = dt - birthDate;
+
+                int hours = (int)ageTs.TotalHours;
+                int min = ageTs.Minutes;
+
+                Console.WriteLine($"Your age is {hours} Hours and {min} minutes ");
+            }
+
+            #endregion
         }
 
     }
