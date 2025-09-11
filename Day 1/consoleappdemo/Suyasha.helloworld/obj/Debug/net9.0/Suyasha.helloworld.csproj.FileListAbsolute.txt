@@ -26,3 +26,18 @@ C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\consoleappdemo\Suyasha.hello
 C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\consoleappdemo\Suyasha.helloworld\obj\Debug\net9.0\Suyasha.helloworld.pdb
 C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\consoleappdemo\Suyasha.helloworld\obj\Debug\net9.0\Suyasha.helloworld.genruntimeconfig.cache
 C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\consoleappdemo\Suyasha.helloworld\obj\Debug\net9.0\ref\Suyasha.helloworld.dll
+C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\Day 1\consoleappdemo\Suyasha.helloworld\bin\Debug\net9.0\Suyasha.helloworld.exe
+C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\Day 1\consoleappdemo\Suyasha.helloworld\bin\Debug\net9.0\Suyasha.helloworld.deps.json
+C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\Day 1\consoleappdemo\Suyasha.helloworld\bin\Debug\net9.0\Suyasha.helloworld.runtimeconfig.json
+C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\Day 1\consoleappdemo\Suyasha.helloworld\bin\Debug\net9.0\Suyasha.helloworld.dll
+C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\Day 1\consoleappdemo\Suyasha.helloworld\bin\Debug\net9.0\Suyasha.helloworld.pdb
+C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\Day 1\consoleappdemo\Suyasha.helloworld\obj\Debug\net9.0\Suyasha.helloworld.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\Day 1\consoleappdemo\Suyasha.helloworld\obj\Debug\net9.0\Suyasha.helloworld.AssemblyInfoInputs.cache
+C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\Day 1\consoleappdemo\Suyasha.helloworld\obj\Debug\net9.0\Suyasha.helloworld.AssemblyInfo.cs
+C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\Day 1\consoleappdemo\Suyasha.helloworld\obj\Debug\net9.0\Suyasha.helloworld.csproj.CoreCompileInputs.cache
+C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\Day 1\consoleappdemo\Suyasha.helloworld\obj\Debug\net9.0\Suyasha.helloworld.sourcelink.json
+C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\Day 1\consoleappdemo\Suyasha.helloworld\obj\Debug\net9.0\Suyasha.helloworld.dll
+C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\Day 1\consoleappdemo\Suyasha.helloworld\obj\Debug\net9.0\refint\Suyasha.helloworld.dll
+C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\Day 1\consoleappdemo\Suyasha.helloworld\obj\Debug\net9.0\Suyasha.helloworld.pdb
+C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\Day 1\consoleappdemo\Suyasha.helloworld\obj\Debug\net9.0\Suyasha.helloworld.genruntimeconfig.cache
+C:\Users\lenovo\OneDrive\Desktop\internship-batch-7\Day 1\consoleappdemo\Suyasha.helloworld\obj\Debug\net9.0\ref\Suyasha.helloworld.dll

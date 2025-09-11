@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\consoleappdemo\\consoleappdemo.csproj": {}
+    "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\consoleappdemo\\consoleappdemo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\consoleappdemo\\consoleappdemo.csproj": {
+    "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\consoleappdemo\\consoleappdemo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\consoleappdemo\\consoleappdemo.csproj",
+        "projectUniqueName": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\consoleappdemo\\consoleappdemo.csproj",
         "projectName": "consoleappdemo",
-        "projectPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\consoleappdemo\\consoleappdemo.csproj",
+        "projectPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\consoleappdemo\\consoleappdemo.csproj",
         "packagesPath": "C:\\Users\\lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\consoleappdemo\\obj\\",
+        "outputPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\consoleappdemo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

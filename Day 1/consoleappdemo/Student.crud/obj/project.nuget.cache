@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fQe9/296j+s=",
+  "dgSpecHash": "wKjw8jUkfjo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\Student.crud\\Student.crud.csproj",
+  "projectFilePath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\Student.crud\\Student.crud.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lenovo\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\lenovo\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",

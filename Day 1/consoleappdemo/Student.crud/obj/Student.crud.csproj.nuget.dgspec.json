@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\Student.crud\\Student.crud.csproj": {}
+    "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\Student.crud\\Student.crud.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\Student.crud\\Student.crud.csproj": {
+    "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\Student.crud\\Student.crud.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\Student.crud\\Student.crud.csproj",
+        "projectUniqueName": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\Student.crud\\Student.crud.csproj",
         "projectName": "Student.crud",
-        "projectPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\Student.crud\\Student.crud.csproj",
+        "projectPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\Student.crud\\Student.crud.csproj",
         "packagesPath": "C:\\Users\\lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\Student.crud\\obj\\",
+        "outputPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\Student.crud\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

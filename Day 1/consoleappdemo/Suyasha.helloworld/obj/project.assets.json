@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\Suyasha.helloworld\\Suyasha.helloworld.csproj",
+      "projectUniqueName": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\Suyasha.helloworld\\Suyasha.helloworld.csproj",
       "projectName": "Suyasha.helloworld",
-      "projectPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\Suyasha.helloworld\\Suyasha.helloworld.csproj",
+      "projectPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\Suyasha.helloworld\\Suyasha.helloworld.csproj",
       "packagesPath": "C:\\Users\\lenovo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\Suyasha.helloworld\\obj\\",
+      "outputPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\Suyasha.helloworld\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

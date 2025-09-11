@@ -1,138 +1,206 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace Student.crud
+namespace Student.crud;
+
+internal class Program
 {
-    internal class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        SqlConnection sqlConnection;
+        string connectionString = @"Data Source=.;Initial Catalog=StudentCRUD;Integrated Security=True;Trust Server Certificate=True";
+        sqlConnection = new SqlConnection(connectionString);
+        sqlConnection.Open();
+        try
         {
-            SqlConnection sqlConnection;
-            string connectionString = @"Data Source=.;Initial Catalog=StudentCRUD;Integrated Security=True;Trust Server Certificate=True";
-            sqlConnection = new SqlConnection(connectionString);
-            sqlConnection.Open();
-            try
-            {
-                
-                Console.WriteLine("connection established sucesfull");
-                string answer;
 
-                do
+            Console.WriteLine("connection established sucesfull");
+            string answer;
+
+            do
+            {
+                Console.WriteLine("==========================================");
+                Console.WriteLine("        STUDENT CRUD MANAGEMENT");
+                Console.WriteLine("==========================================");
+                Console.WriteLine("Select from the options to perform the operation:" +
+                    "\n1.Add Student Data." +
+                    "\n2.Retrive Student Data." +
+                    "\n3.Update Student Name." +
+                    "\n4.Update Student age." +
+                    "\n5.Delete Student Record");
+                int choice = int.Parse(Console.ReadLine());
+
+
+                switch (choice)
                 {
-                    Console.WriteLine("==========================================");
-                    Console.WriteLine("        STUDENT CRUD MANAGEMENT");
-                    Console.WriteLine("==========================================");
-                    Console.WriteLine("Select from the options to perform the operation:" +
-                        "\n1.Add Student Data." +
-                        "\n2.Retrive Student Data." +
-                        "\n3.Update Student Name." +
-                        "\n4.Update Student age." +
-                        "\n5.Delete Student Record");
-                    int choice = int.Parse(Console.ReadLine());
+                    case 1:
+
+                        //insert data
+
+                        Console.WriteLine("\nEnter your name ");
+                        string name = Console.ReadLine();
+                        Console.WriteLine("\nEnter your age ");
+                        int age = int.Parse(Console.ReadLine());
+                        string insertQuery = "INSERT INTO Student (Name, Age) VALUES ('" + name + "'," + age + ")";
 
 
-                    switch (choice)
-                    {
-                        case 1:
-
-                            //insert data
-
-                            Console.WriteLine("\nEnter your name ");
-                            string name = Console.ReadLine();
-                            Console.WriteLine("\nEnter your age ");
-                            int age = int.Parse(Console.ReadLine());
-                            string insertQuery = "INSERT INTO Student (Name, Age) VALUES ('" + name + "'," + age + ")";
+                        SqlCommand insertcommand = new SqlCommand(insertQuery, sqlConnection);
+                        insertcommand.ExecuteNonQuery();
+                        Console.WriteLine("\nData is sucessfully inserted");
+                        break;
 
 
-                            SqlCommand insertcommand = new SqlCommand(insertQuery, sqlConnection);
-                            insertcommand.ExecuteNonQuery();
-                            Console.WriteLine("\nData is sucessfully inserted");
-                            break;
+                    case 2:
+
+                        //retrive data
+
+                        string displayQuery = "Select * from student";
+                        SqlCommand displaycommand = new SqlCommand(displayQuery, sqlConnection);
+                        SqlDataReader datareader = displaycommand.ExecuteReader();
+                        Console.WriteLine("==========================================");
+                        while (datareader.Read())
+                        {
+
+                            Console.WriteLine("Id: " + datareader.GetValue(0).ToString());
+                            Console.WriteLine("Name: " + datareader.GetValue(1));
+                            Console.WriteLine("Age: " + datareader.GetValue(2).ToString());
+
+                            Console.WriteLine("\n");
+                        }
+                        Console.WriteLine("==========================================");
+                        datareader.Close();
+                        break;
 
 
-                        case 2:
+                    case 3:
 
-                            //retrive data
+                        //update name data
 
-                            string displayQuery = "Select * from student";
-                            SqlCommand displaycommand = new SqlCommand(displayQuery, sqlConnection);
-                            SqlDataReader datareader = displaycommand.ExecuteReader();
-                            Console.WriteLine("==========================================");
-                            while (datareader.Read())
+                        int student_id_update_name;
+                        bool idverify = false;
+                        while (!idverify)
+                        {
+                            Console.WriteLine("\nEnter user id to update ");
+                            int student_id_name_update = int.Parse(Console.ReadLine());
+                            string CheckStudentCount = "SELECT COUNT(*) FROM student WHERE studentid = " + student_id_name_update;
+                            SqlCommand checkID = new SqlCommand(CheckStudentCount, sqlConnection);
+                            int count = (int)checkID.ExecuteScalar();
+
+                            if (count > 0)
                             {
-                                
-                                Console.WriteLine("Id: " + datareader.GetValue(0).ToString());
-                                Console.WriteLine("Name: " + datareader.GetValue(1));
-                                Console.WriteLine("Age: " + datareader.GetValue(2).ToString());
-                                
-                                Console.WriteLine("\n");
+                                Console.WriteLine("\nEnter updated user name ");
+                                string username = Console.ReadLine();
+                                string UpdateNameQuery = "Update student set name = " + "'" + username + "'" + " where studentid =" + student_id_name_update;
+                                SqlCommand UpdateNamecommand = new SqlCommand(UpdateNameQuery, sqlConnection);
+                                UpdateNamecommand.ExecuteNonQuery();
+                                Console.WriteLine("\nData updated sucessfullt name ");
+                                idverify = true;
                             }
-                            Console.WriteLine("==========================================");
-                            datareader.Close();
-                            break;
+                            else
+                            {
+                                Console.WriteLine("Id not found");
+                            }
+                        }
 
 
-                        case 3:
+                        break;
 
-                            //update name data
+
+                    case 4:
+
+                        //update age data
+
+                        int student_id_update;
+                        bool idcheck = false;
+
+                        while (!idcheck)
+                        {
                             Console.WriteLine("\nEnter user id to update ");
-                            int user_id = int.Parse(Console.ReadLine());
-                            Console.WriteLine("\nEnter updated user name ");
-                            string username = Console.ReadLine();
-                            string UpdateNameQuery = "Update student set name = " +"'" +username+"'" + " where studentid =" + user_id;
-                            SqlCommand UpdateNamecommand = new SqlCommand(UpdateNameQuery, sqlConnection);
-                            UpdateNamecommand.ExecuteNonQuery();
-                            Console.WriteLine("\nData updated sucessfullt name ");
-                            break;
+                            student_id_update = int.Parse(Console.ReadLine());
+                            string CheckStudentCount = "SELECT COUNT(*) FROM student WHERE studentid = " + student_id_update;
+                            SqlCommand checkID = new SqlCommand(CheckStudentCount, sqlConnection);
+                            int count = (int)checkID.ExecuteScalar();
+
+                            if (count > 0)
+                            {
+                                Console.WriteLine("\nEnter updated user age ");
+                                int userage = int.Parse(Console.ReadLine());
+                                string UpdateAgeQuery = "Update student set age =" + userage + " where studentid =" + student_id_update;
+                                SqlCommand UpdateAgecommand = new SqlCommand(UpdateAgeQuery, sqlConnection);
+                                UpdateAgecommand.ExecuteNonQuery();
+                                Console.WriteLine("\nData updated sucessfullt age ");
+                                idcheck = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Id not found");
+                            }
+                        }
+                        break;
 
 
-                        case 4:
+                    case 5:
+                        //delete data
 
-                            //update age data
-                            Console.WriteLine("\nEnter user id to update ");
-                            int userid = int.Parse(Console.ReadLine());
-                            Console.WriteLine("\nEnter updated user age ");
-                            int userage = int.Parse(Console.ReadLine());
-                            string UpdateAgeQuery = "Update student set age =" + userage + " where studentid =" + userid;
-                            SqlCommand UpdateAgecommand = new SqlCommand(UpdateAgeQuery, sqlConnection);
-                            UpdateAgecommand.ExecuteNonQuery();
-                            Console.WriteLine("\nData updated sucessfullt age ");
-                            break;
+                        int student_id_delete;
+                        bool idExists = false;
 
-
-                        case 5:
-                            //delete data
-
+                        while (!idExists)
+                        {
                             Console.WriteLine("\nEnter the id to be deleted ");
-                            int delete_id = int.Parse(Console.ReadLine());
-                            string DeleteQuery = "Delete From student where studentid =" + delete_id;
-                            SqlCommand deletecommand = new SqlCommand(DeleteQuery, sqlConnection);
-                            deletecommand.ExecuteNonQuery();
-                            Console.WriteLine("\nDeleted sucessfully");
+                            student_id_delete = int.Parse(Console.ReadLine());
+                            string CheckStudentCount = "SELECT COUNT(*) FROM student WHERE studentid = " + student_id_delete;
+                            SqlCommand checkID = new SqlCommand(CheckStudentCount, sqlConnection);
+                            int count = (int)checkID.ExecuteScalar(); ;
 
-                            break;
 
-                        default:
-                            Console.WriteLine("Invalid input");
-                            break;
+                            if (count > 0) {
 
-                    }
-                    
-                    Console.WriteLine("Do you want to continue ");
-                    answer = Console.ReadLine();
+                                string DeleteQuery = "Delete From student where studentid =" + student_id_delete;
+                                SqlCommand deletecommand = new SqlCommand(DeleteQuery, sqlConnection);
+                                deletecommand.ExecuteNonQuery();
+                                Console.WriteLine("\nDeleted sucessfully");
+                                idExists = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Id not found");
+                            }
 
-                } while (answer.ToLower() != "no");
 
-                
-            }
+                        }
 
-            catch (Exception ex) { 
-                Console.WriteLine(ex.Message);
+                        break;
 
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
+                    default:
+                        Console.WriteLine("Invalid input");
+                        break;
+
+                }
+
+                Console.WriteLine("Do you want to continue ");
+                answer = Console.ReadLine();
+
+            } while (answer.ToLower() != "no");
+
+
+        }
+
+        catch (Exception ex) {
+            Console.WriteLine(ex.Message);
+
+        }
+        finally
+        {
+            sqlConnection.Close();
         }
     }
+
+   
 }
+   
+    
+
+
+
+
+

@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\",
+  "WorkspaceRootPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F6B0517A-8636-444C-88EA-D18526D043BD}|Student.crud\\Student.crud.csproj|c:\\users\\lenovo\\onedrive\\desktop\\internship-batch-7\\consoleappdemo\\student.crud\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F6B0517A-8636-444C-88EA-D18526D043BD}|Student.crud\\Student.crud.csproj|c:\\users\\lenovo\\onedrive\\desktop\\internship-batch-7\\day 1\\consoleappdemo\\student.crud\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F6B0517A-8636-444C-88EA-D18526D043BD}|Student.crud\\Student.crud.csproj|solutionrelative:student.crud\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9ED2A2CF-94CE-4F61-A7D8-BFA89536CACF}|Suyasha.helloworld\\Suyasha.helloworld.csproj|c:\\users\\lenovo\\onedrive\\desktop\\internship-batch-7\\consoleappdemo\\suyasha.helloworld\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9ED2A2CF-94CE-4F61-A7D8-BFA89536CACF}|Suyasha.helloworld\\Suyasha.helloworld.csproj|c:\\users\\lenovo\\onedrive\\desktop\\internship-batch-7\\day 1\\consoleappdemo\\suyasha.helloworld\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9ED2A2CF-94CE-4F61-A7D8-BFA89536CACF}|Suyasha.helloworld\\Suyasha.helloworld.csproj|solutionrelative:suyasha.helloworld\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -42,11 +42,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\Student.crud\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\Student.crud\\Program.cs",
               "RelativeDocumentMoniker": "Student.crud\\Program.cs",
-              "ToolTip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\Student.crud\\Program.cs",
-              "RelativeToolTip": "Student.crud\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\Student.crud\\Program.cs*",
+              "RelativeToolTip": "Student.crud\\Program.cs*",
+              "ViewState": "AgIAAKkAAAAAAAAAAAAqwMEAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-09T02:51:03.168Z",
               "EditorCaption": ""
@@ -55,9 +55,9 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\Suyasha.helloworld\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\Suyasha.helloworld\\Program.cs",
               "RelativeDocumentMoniker": "Suyasha.helloworld\\Program.cs",
-              "ToolTip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\consoleappdemo\\Suyasha.helloworld\\Program.cs",
+              "ToolTip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\internship-batch-7\\Day 1\\consoleappdemo\\Suyasha.helloworld\\Program.cs",
               "RelativeToolTip": "Suyasha.helloworld\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
