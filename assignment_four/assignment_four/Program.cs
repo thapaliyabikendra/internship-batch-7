@@ -27,7 +27,7 @@ namespace assignment_four
         {
             Console.WriteLine("Q1. Implicit Conversion");
             Console.WriteLine("----------------------");
-            int number = 123;
+            int number = 23;
             double result1 = number;
             Console.WriteLine("  1.Implicit Conversion number int to double is :" + result1);
 
