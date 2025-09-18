@@ -10,8 +10,8 @@ public interface IFeedable
 public class Animal : IFeedable
 {
     private int _id;   
-    private int _age=0;
-    public string feedingSchedule;
+    private int _age;
+    public string feedingSchedule;//pascal
 
     public Animal(int id, int age,string feedingSchedule)
     {
@@ -25,15 +25,13 @@ public class Animal : IFeedable
         get => _age;
         set
         {
-            if (value <= 100 && value > 0)
+            if (value > 100 && value < 0)
             {
-                _age = value;
-                Console.WriteLine("The age is: "+ _age);
+                Console.WriteLine("Age must be between 0 and 100");//add exception
+                
             }
-            else
-            {
-                Console.WriteLine("Age must be between 0 and 100");
-            }
+            _age = value;
+            Console.WriteLine("The age is: " + _age);//use method
         }
     }
 
@@ -129,8 +127,16 @@ public class Pices : Animal
         Snake s = new Snake(3,5,"noon");
         Console.WriteLine("Snake Class");
         s.CalculateFoodCost();
+        s.Age = 10;
         s.SetFeedingSchedule("night");
         s.GetFeedingSchedule();
+
+        Turtle t = new Turtle(3, 5, "noon");
+        Console.WriteLine("turtle Class");
+        t.CalculateFoodCost();
+       
+        t.SetFeedingSchedule("night");
+        t.GetFeedingSchedule();
     }
 
 }
