@@ -8,10 +8,16 @@ namespace LINQAssingment.Model;
 
 public class Student
 {
-    public int Id { get; set; }
+    private static int Counter = 0;
+    public int Id { get; private set; }
     public string Name { get; set; }
     public int Age { get; set; }
     public string Gender { get; set; }
     public double Marks { get; set; }
     public string City { get; set; }
+
+    public Student()
+    {
+        Id = Counter++;
+    }
 }

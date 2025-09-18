@@ -11,7 +11,6 @@ internal class Program
         {
             new Student
             {
-                Id = 1,
                 Name = "Alice",
                 Age = 20,
                 Gender = "Female",
@@ -20,7 +19,6 @@ internal class Program
             },
             new Student
             {
-                Id = 2,
                 Name = "Bob",
                 Age = 22,
                 Gender = "Male",
@@ -29,7 +27,6 @@ internal class Program
             },
             new Student
             {
-                Id = 3,
                 Name = "Charlie",
                 Age = 19,
                 Gender = "Male",
@@ -38,7 +35,6 @@ internal class Program
             },
             new Student
             {
-                Id = 4,
                 Name = "Diana",
                 Age = 21,
                 Gender = "Female",
@@ -47,7 +43,6 @@ internal class Program
             },
             new Student
             {
-                Id = 5,
                 Name = "Ethan",
                 Age = 20,
                 Gender = "Male",
@@ -275,7 +270,6 @@ internal class Program
         {
             new Student
             {
-                Id = 1,
                 Name = "Rammy",
                 Age = 20,
                 Gender = "Female",
@@ -284,7 +278,6 @@ internal class Program
             },
             new Student
             {
-                Id = 2,
                 Name = "Sham",
                 Age = 22,
                 Gender = "Male",
@@ -293,7 +286,6 @@ internal class Program
             },
             new Student
             {
-                Id = 30,
                 Name = "Charles",
                 Age = 19,
                 Gender = "Male",
@@ -309,5 +301,7 @@ internal class Program
         {
             Console.WriteLine($"Id: {student.Id} ,Name: {student.Name}");
         }
+
+        // var combinedList2= students.Join(students2,x=>x.Id,y=>y.Id);
     }
 }
