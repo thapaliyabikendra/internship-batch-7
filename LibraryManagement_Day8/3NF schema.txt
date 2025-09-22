@@ -1,0 +1,3 @@
+Author(Id(Primary Key),Name(not null),Country),
+Books(Id(primarykey),Title(unique),ISBN(unique,notnull),AuthorId(not 	null),publishedyear),Foreignkey(authored) refrence author(id)
+Borrowere(id(primarykey),Name,Email(unique)
