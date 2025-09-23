@@ -1,61 +1,43 @@
 ﻿using Library.management.Data;
 using Library.management.Models;
 using Library.management.Models.DTO;
+using Library.management.Repo.Implementation;
+using Library.management.Repo.Interface;
 using Library.management.Service.Interface;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
 
 namespace Library.management.Service.Implementation;
 
-public class Borrower_BookService : IAdvanceQueryService
+public class AdvanceQueryService : IAdvanceQueryService
 {
-    ApplicationDbContext _context;
-    public Borrower_BookService(ApplicationDbContext context)
+    IAdvanceQueryRepo _repo;
+    public AdvanceQueryService(IAdvanceQueryRepo repo)
     {
-        _context = context;
+        _repo = repo;
     }
 
    
 
     public async Task<List<TopBook>> GetTop3BorrowedAsync ()
     {
-
-        return await _context.Books
-        .Select(b => new TopBook
-        {
-            Title=b.Title,
-            BorrowCount = b.Book_Borrowers.Count()  // Count how many times this book was borrowed
-        })
-        .OrderByDescending(b => b.BorrowCount)
-        .Take(3)
-        .ToListAsync();
-
-    
+        List<TopBook> tb=await _repo.GetTop3BorrowedAsync();
+        return tb;
+        
     }
 
     public async Task<List<CountBook>> GetAuthorBookCountAsync()
     {
-        return await _context.Authors
-            .Select(bc=> new CountBook
-            {
-                AuthorId = bc.AuthorId,
-                BookCount=bc.Books.Count()
-            }).ToListAsync();
+        List<CountBook> authorCount = await _repo.GetAuthorBookCountAsync();
+        return authorCount;
+       
     }
 
     public async Task<List<BorrowerCount>> GetBorrowerCountAsync() 
-    { 
-        return await _context.borrowers
-                                
-                                .Select(bc=> new BorrowerCount 
-                                { 
-                                    BorrowerId=bc.Id,
-                                    BorrowCount=bc.Book_Borrowers.Count(),
+    {
+        List<BorrowerCount> borrowerCount = await _repo.GetBorrowerCountAsync();
+        return borrowerCount;
 
-                                   BorrowerName=bc.Name
-                                })
-                                .OrderByDescending(bc => bc.BorrowCount)
-
-                                .ToListAsync();
+       
     }
 }

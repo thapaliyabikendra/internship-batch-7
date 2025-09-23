@@ -23,7 +23,7 @@ public class Book
     public Author Author { get; set; }
 
     
-    public ICollection<Book_Borrower> Book_Borrowers { get; set; }
+    public virtual ICollection<Book_Borrower> Book_Borrowers { get; set; }//virtual
 
 
 }

@@ -4,5 +4,8 @@ namespace Library.management.Service.Interface;
 
 public interface IAuthurService
 {
-    Task<Author> AddAuthorAsync(Author author);
+    Task<Author> AddAuthorAsync(Author author);//create
+    
+
+
 }

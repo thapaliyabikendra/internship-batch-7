@@ -3,7 +3,8 @@ using Library.management.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.management.Controllers;
-
+[ApiController]
+[Route("api/[controller]")]
 public class BorrowerController:ControllerBase
 {
     private readonly IBorrowerService _borrowerService;
@@ -19,7 +20,7 @@ public class BorrowerController:ControllerBase
     }
 
 
-    [HttpGet]
+    [HttpDelete("{id}")]
     public async Task<Borrower> DeleteBorrowerByID(int Id)
     {
         return await _borrowerService.DeleteBorrowerByIDAsync( Id);

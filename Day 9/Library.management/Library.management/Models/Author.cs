@@ -12,6 +12,6 @@ public class Author
     [Required]
     public string Country { get; set; }
 
-    [JsonIgnore]
-    public ICollection<Book>? Books { get; set; }
+    
+    public virtual ICollection<Book>? Books { get; set; }
 }

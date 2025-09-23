@@ -1,5 +1,6 @@
 ﻿using Library.management.Data;
 using Library.management.Models;
+using Library.management.Repo.Interface;
 using Library.management.Service.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -8,28 +9,26 @@ namespace Library.management.Service.Implementation;
 
 public class BorrowerService : IBorrowerService
 {
-    public readonly ApplicationDbContext _context;
-    public BorrowerService(ApplicationDbContext context) 
+     IBorrowerRepo _repo;
+    public BorrowerService(IBorrowerRepo repo) 
     {
 
-        _context = context;
+        _repo = repo;
     
     }
 
     public async Task<IEnumerable<Borrower>> GetAllBorrowerAsync()
     {
-        return await _context.borrowers.Where(b => b.IsActive == true).ToListAsync();
+        var data=await _repo.GetAllBorrowerAsync();
+        return data;
        
     }
 
     public async Task<Borrower> DeleteBorrowerByIDAsync(int id)
     {
-        var data= await _context.borrowers.Where(b => b.IsActive == true && b.Id==id).FirstOrDefaultAsync();
+        var data= await _repo.DeleteBorrowerByIDAsync(id);
 
-            _context.borrowers.Remove(data);
-            _context.SaveChangesAsync();
-
-            return data;
+        return data;
         
 
     }

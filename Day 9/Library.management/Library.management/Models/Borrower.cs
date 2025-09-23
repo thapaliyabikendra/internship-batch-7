@@ -12,5 +12,5 @@ public class Borrower
     public bool IsActive { get; set; } = true;
 
     // Navigation property for many-to-many with Book
-    public ICollection<Book_Borrower> Book_Borrowers { get; set; }
+    public virtual ICollection<Book_Borrower> Book_Borrowers { get; set; }
 }

@@ -1,5 +1,6 @@
 ﻿using Library.management.Data;
 using Library.management.Models;
+using Library.management.Repo.Interface;
 using Library.management.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,17 +11,18 @@ namespace Library.management.Service.Implementation;
 
 public class AuthorService : IAuthurService
 {
-    ApplicationDbContext _context;
-    public AuthorService(ApplicationDbContext context)
+    IAuthorRepo _repo;
+    public AuthorService(IAuthorRepo repo)
     {
-        _context = context;
+        _repo = repo;
     }
     public async Task<Author> AddAuthorAsync( Author author)
     {
         
-        _context.AddAsync(author);
-        _context.SaveChangesAsync();
+        var data=await _repo.AddAuthorAsync(author);
 
-        return author;
+        return data;
     }
+
+    
 }
