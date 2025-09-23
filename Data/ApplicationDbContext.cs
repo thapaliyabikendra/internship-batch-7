@@ -1,5 +1,6 @@
-using Microsoft.EntityFrameworkCore;
+using InternshipAPI.Constants;
 using InternshipAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace InternshipAPI.Data
 {
@@ -20,6 +21,8 @@ namespace InternshipAPI.Data
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Author> Authors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -103,6 +106,21 @@ namespace InternshipAPI.Data
                 // Composite unique constraint
                 entity.HasIndex(e => new { e.UserId, e.RoleId }).IsUnique();
             });
+
+
+            modelBuilder.Entity<Student>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Name).IsRequired().HasMaxLength(StudentConsts.Name.MaxLength);
+                entity.HasIndex(e => e.Name).IsUnique();
+
+                entity.Property(e => e.Email).IsRequired().HasMaxLength(StudentConsts.Email.MaxLength);
+                entity.HasIndex(e => e.Email).IsUnique();
+
+                entity.Property(e => e.PhoneNumber).HasMaxLength(StudentConsts.PhoneNumber.MaxLength);
+            });
+
+
 
             // Seed data
             SeedData(modelBuilder);
