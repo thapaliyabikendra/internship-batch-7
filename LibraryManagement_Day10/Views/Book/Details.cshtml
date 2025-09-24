@@ -1,0 +1,17 @@
+﻿@using LibraryManagement_Day10.Models
+@model Book
+
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<h2>Book Details</h2>
+
+<table class="table">
+    <tr><th>Title</th><td>@Model.Name</td></tr>
+    <tr><th>ISBN</th><td>@Model.ISBN</td></tr>
+    <tr><th>Published Year</th><td>@Model.PublishedYear</td></tr>
+    <tr><th>Author ID</th><td>@Model.AuthorId</td></tr>
+</table>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
