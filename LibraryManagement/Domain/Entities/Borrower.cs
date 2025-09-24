@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryManagement.Entity
+namespace Domain.Entities
 {
-    public class Author
+    public class Borrower
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Country { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
 
-        // navigation property from Book
+        // many-to-many relationship
         public virtual ICollection<Book> Book { get; set; }
     }
 }

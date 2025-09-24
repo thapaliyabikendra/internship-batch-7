@@ -13,6 +13,6 @@ namespace LibraryManagement.Entity
         public string Email { get; set; }
 
         // many-to-many relationship
-        public virtual ICollection<Book> BookL { get; set; }
+        public virtual ICollection<Book> Book { get; set; }
     }
 }
