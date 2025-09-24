@@ -3,7 +3,7 @@ using Library.management.Models.DTO;
 using Library.management.Repo.Interface;
 using Microsoft.EntityFrameworkCore;
 
-namespace Library.management.Repo.Implementation;
+namespace Library.management.Repo;
 
 public class AdvanceQueryRepo: IAdvanceQueryRepo
 {

@@ -1,13 +1,13 @@
 ﻿using Library.management.Data;
 using Library.management.Models;
 using Library.management.Models.DTO;
-using Library.management.Repo.Implementation;
+
 using Library.management.Repo.Interface;
 using Library.management.Service.Interface;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
 
-namespace Library.management.Service.Implementation;
+namespace Library.management.Service;
 
 public class AdvanceQueryService : IAdvanceQueryService
 {

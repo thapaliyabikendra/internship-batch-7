@@ -1,6 +1,10 @@
 
+using Contract.Interfaces.Repo_Interface;
+using Contract.Interfaces.Service_Interface;
 using Library.management.Data;
-using Library.management.Service.Implementation;
+using Library.management.Repo;
+using Library.management.Repo.Interface;
+using Library.management.Service;
 using Library.management.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +29,13 @@ public class Program
 
         builder.Services.AddScoped<IAuthurService, AuthorService>();
         builder.Services.AddScoped<IBorrowerService, BorrowerService>();
-       
+        builder.Services.AddScoped<IBookService, BookService>();
+
+        builder.Services.AddScoped<IAuthorRepo, AuthorRepo>();
+        builder.Services.AddScoped<IBorrowerRepo, BorrowerRepo>();
+        builder.Services.AddScoped<IBookRepo, BookRepo>();
+
+
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
 
