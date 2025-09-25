@@ -1,9 +1,9 @@
+using Application.Enums;
+using Application.Services;
 using Contract.Interfaces.Author;
 using Contract.Repository;
+using Infrastructure.Repository;
 using LibraryManagementApplication.Data;
-using LibraryManagementApplication.Enums;
-using LibraryManagementApplication.Repository;
-using LibraryManagementApplication.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,14 +18,22 @@ builder.Services.AddSwaggerGen();
 
 // Configure Entity Framework Core with SQLite with Lazy loading
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("Default")).UseLazyLoadingProxies()
-);
+{
+    var connectionString = builder.Configuration.GetConnectionString("Default");
+
+    options
+        .UseSqlite(connectionString, b => b.MigrationsAssembly("Infrastructure"))
+        .UseLazyLoadingProxies();
+});
 
 // Register the EF Core implementation with the EfCore key
 builder.Services.AddKeyedScoped<IAuthorRepository, AuthorEfRepository>(DataSource.EfCore);
 
-// Register the Dapper implementation with the Dapper key
+// register the Dapper implementation with  Dapper key
 builder.Services.AddKeyedScoped<IAuthorRepository, AuthorDapperRepository>(DataSource.Dapper);
+
+//register ADO.Net implementation with key
+builder.Services.AddKeyedScoped<IAuthorRepository, AuthorAdoRepository>(DataSource.Ado);
 
 //Register entity Services
 builder.Services.AddScoped<IAuthorService, AuthorService>();

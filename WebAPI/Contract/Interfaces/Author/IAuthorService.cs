@@ -11,11 +11,13 @@ public interface IAuthorService
 {
     Task<ServiceResponseDto<Guid>> CreateAsync(CreateAuthorDto author);
 
-    Task<ServiceResponseDto<object>> UpdateAsync(Guid id, UpdateAuthorDto author);
+    Task<ServiceResponseDto<bool>> UpdateAsync(Guid id, UpdateAuthorDto author);
 
-    Task<ServiceResponseDto<object>> DeleteAsync(Guid id);
+    Task<ServiceResponseDto<bool>> DeleteAsync(Guid id);
 
     Task<ServiceResponseDto<IEnumerable<GetAuthorDto>>> GetAllAsync();
+
+    Task<ServiceResponseDto<PagedResponse<GetAuthorDto>>> GetByPage(int pageNumber, int pageSize);
 
     Task<ServiceResponseDto<GetAuthorDto>> GetByIdAsync(Guid id);
 }

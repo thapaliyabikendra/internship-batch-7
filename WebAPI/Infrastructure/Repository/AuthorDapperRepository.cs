@@ -4,8 +4,9 @@ using Dapper;
 using Domain.DTO;
 using Domain.Entities.Application;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Configuration;
 
-namespace LibraryManagementApplication.Repository;
+namespace Infrastructure.Repository;
 
 public class AuthorDapperRepository : IAuthorRepository
 {
@@ -21,14 +22,15 @@ public class AuthorDapperRepository : IAuthorRepository
         return new SqliteConnection(_connectionString);
     }
 
-    public async Task<Guid> AddAsync(Author entity)
+    public async Task<Guid> CreateAsync(Author entity)
     {
         entity.Id = Guid.NewGuid();
+        entity.AddedDate = DateTime.UtcNow;
 
         const string sql =
             @"
-        INSERT INTO Authors (Id, Name, Country)
-        VALUES (@Id, @Name, @Country);";
+        INSERT INTO Authors (Id, Name, Country, AddedDate)
+        VALUES (@Id, @Name, @Country,@AddedDate);";
         using var connection = CreateConnection();
         await connection.ExecuteAsync(sql, entity);
         return entity.Id;
@@ -62,14 +64,41 @@ public class AuthorDapperRepository : IAuthorRepository
 
     public async Task<bool> UpdateAsync(Author entity)
     {
+        entity.ModifiedDate = DateTime.UtcNow;
         const string sql =
             @"
             UPDATE Authors 
-            SET Name = @Name, Country = @Country 
+            SET Name = @Name, Country = @Country ,ModifiedDate=@ModifiedDate
             WHERE Id = @Id;";
 
         using var connection = CreateConnection();
         var affectedRows = await connection.ExecuteAsync(sql, entity);
         return affectedRows > 0;
+    }
+
+    public async Task<PagedResponse<GetAuthorDto>> GetByPageAsync(int pageNumber, int pageSize)
+    {
+        const string sql =
+            @"
+        SELECT Name, Country
+        FROM Authors
+        ORDER BY Id
+        LIMIT @PageSize OFFSET @Offset";
+        using var connection = CreateConnection();
+
+        var totalCount = await connection.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM Authors");
+
+        var authors = await connection.QueryAsync<GetAuthorDto>(
+            sql,
+            new { PageSize = pageSize, Offset = (pageNumber - 1) * pageSize }
+        );
+
+        return new PagedResponse<GetAuthorDto>
+        {
+            Items = authors,
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+            TotalCount = totalCount
+        };
     }
 }

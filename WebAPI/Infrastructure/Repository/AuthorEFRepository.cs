@@ -1,9 +1,10 @@
-﻿using Domain.DTO;
+﻿using Contract.Repository;
+using Domain.DTO;
 using Domain.Entities.Application;
 using LibraryManagementApplication.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Contract.Repository;
+namespace Infrastructure.Repository;
 
 public class AuthorEfRepository : IAuthorRepository
 {
@@ -14,7 +15,7 @@ public class AuthorEfRepository : IAuthorRepository
         _context = context;
     }
 
-    public async Task<Guid> AddAsync(Author entity)
+    public async Task<Guid> CreateAsync(Author entity)
     {
         await _context.Authors.AddAsync(entity);
         await _context.SaveChangesAsync();
@@ -48,9 +49,35 @@ public class AuthorEfRepository : IAuthorRepository
             .FirstOrDefaultAsync();
     }
 
+    public async Task<PagedResponse<GetAuthorDto>> GetByPageAsync(int pageNumber, int pageSize)
+    {
+        var totalCount = await _context.Authors.CountAsync();
+        var authors = await _context
+            .Authors.OrderBy(x => x.Id)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .Select(x => new GetAuthorDto { Country = x.Country, Name = x.Name })
+            .ToListAsync();
+        return new PagedResponse<GetAuthorDto>
+        {
+            Items = authors,
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+            TotalCount = totalCount
+        };
+    }
+
     public async Task<bool> UpdateAsync(Author entity)
     {
-        _context.Authors.Update(entity);
+        var author = await _context.Authors.FindAsync(entity.Id);
+        if (author == null)
+        {
+            return false;
+        }
+        author.Name = entity.Name;
+        author.Country = entity.Country;
+        author.ModifiedDate = DateTime.UtcNow;
+
         return await _context.SaveChangesAsync() > 0;
     }
 
