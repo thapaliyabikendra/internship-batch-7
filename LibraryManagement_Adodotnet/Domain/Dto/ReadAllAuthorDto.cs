@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Dto;
 
-public class ReadAllAuthor
+public class ReadAllAuthorDto
 {
     public string? Name { get; set; }    
     public string? Country { get; set; }

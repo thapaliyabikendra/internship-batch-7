@@ -10,9 +10,10 @@ namespace Contract.Interface.Services
 {
     public interface IBookService
     {
-        void AddBook(AddBookDto dto);
+        void CreateBook(AddBookDto dto);
         void UpdateBook(UpdateBookDto dto);
-        List<BookEntity> GetAllBooks();
+        List<ReadAllBookDto> GetAllBooks();
+
 
     }
 }

@@ -1,27 +1,32 @@
-﻿using Domain.Dto;
+﻿using Contract.Interface.Repositroy;
+using Contract.Interface.Services;
+using Domain.Dto;
 using Domain.Entities;
-using LibraryManagement.DataAccess;
-using LibraryManagement.Models;
+using Microsoft.Extensions.Logging;
 
-public class BookService
+public class BookService : IBookService
 {
-    private readonly BookRepository _repo;
+    private readonly IBookRepo _repo;
+    private readonly ILogger<BookService> _logger;
 
-    public BookService(BookRepository repo)
+    public BookService(IBookRepo repo, ILogger<BookService> logger)
     {
         _repo = repo;
+        _logger = logger;
     }
 
-    public void AddBook(AddBookDto dto)
+    public void CreateBook(AddBookDto dto)
     {
         var book = new BookEntity
         {
             Id = dto.Id,
             Title = dto.Name,
             ISBN = dto.ISBN,
-            AuthorId = dto.AuthorId
+            AuthorId = dto.AuthorId,
+            PublishedYear = DateTime.Now.Year // or dto.PublishedYear if available
         };
 
+        _logger.LogInformation("Creating book: {Title}", book.Title);
         _repo.CreateBook(book);
     }
 
@@ -33,17 +38,19 @@ public class BookService
             Title = dto.Title
         };
 
+        _logger.LogWarning("Updating book with ID: {Id}", book.Id);
         _repo.UpdateBook(book);
     }
 
-    public List<BookEntity> GetAllBooks()
+    public List<ReadAllBookDto> GetAllBooks()
     {
         var books = _repo.ReadAllBooks();
+        _logger.LogDebug("Fetched {Count} books", books.Count);
 
         return books.Select(b => new ReadAllBookDto
         {
             Name = b.Title,
-            ISBN = b.ISBN,
+            ISBN = b.ISBN
         }).ToList();
     }
 }

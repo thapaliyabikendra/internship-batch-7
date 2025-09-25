@@ -1,33 +1,32 @@
-﻿using Domain.Dto;
-using LibraryManagement.DataAccess;
-using LibraryManagement.Models;
+﻿using Contract.Interface.Repositroy;
+using Contract.Interface.Services;
+using Domain.Dto;
+using Domain.Entities;
+using Microsoft.Extensions.Logging;
 
-public class AuthorService
+public class AuthorService : IAuthorService
 {
-    private readonly AuthorRepository _repo;
+    private readonly IAuthorRepo _repo;
+    private readonly ILogger<AuthorService> _logger;
 
-    public AuthorService(AuthorRepository repo)
+    public AuthorService(IAuthorRepo repo, ILogger<AuthorService> logger)
     {
         _repo = repo;
+        _logger = logger;
     }
 
-    public void AddAuthor(AddAuthorDto dto)
+    public void CreateAuthor(AddAuthorDto dto)
     {
-        var author = new Author
-        {
-            Id = Guid.Parse(dto.Id),
-            Name = dto.Name,
-            Country = dto.Country
-        };
-
-        _repo.CreateAuthor(author.Country, author.Name);
+        _logger.LogInformation("Creating author: {Name}", dto.Name);
+        _repo.CreateAuthor(dto.Name, dto.Country);
     }
 
-    public List<ReadAllAuthor> GetAllAuthors()
+    public List<ReadAllAuthorDto> GetAllAuthors()
     {
         var authors = _repo.ReadAllAuthor();
+        _logger.LogDebug("Fetched {Count} authors", authors.Count);
 
-        return authors.Select(a => new ReadAllAuthor
+        return authors.Select(a => new ReadAllAuthorDto
         {
             Name = a.Name,
             Country = a.Country

@@ -9,8 +9,9 @@ namespace Contract.Interface.Services
 {
     public interface IAuthorService
     {
-        void AddAuthor(AddAuthorDto dto);
-        List<ReadAllAuthor> GetAllAuthors();
+        void CreateAuthor(AddAuthorDto dto);
+        List<ReadAllAuthorDto> GetAllAuthors();
+
 
     }
 }
