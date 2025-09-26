@@ -77,9 +77,7 @@ public class AuthorController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<ServiceResponseDto<IEnumerable<GetAuthorDto>>>> GetById(
-        string id
-    )
+    public async Task<ActionResult<ServiceResponseDto<GetAuthorDto>>> GetById(string id)
     {
         if (!Guid.TryParse(id, out Guid guidId))
         {
