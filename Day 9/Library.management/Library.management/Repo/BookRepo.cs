@@ -21,8 +21,8 @@ public class BookRepo:IBookRepo
     {
 
 
-        _context.AddAsync(book);
-        _context.SaveChangesAsync();
+        await _context.AddAsync(book);
+        await _context.SaveChangesAsync();
 
         _result.Success = true;
         _result.Message = "Data Saved Sucessfullg";
@@ -38,7 +38,7 @@ public class BookRepo:IBookRepo
         if (data != null)
         {
             _context.Books.Remove(data);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             _result.Success = true;
             _result.Message = "Data Sucessfullt Deleted";
 

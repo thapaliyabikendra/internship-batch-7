@@ -13,7 +13,7 @@ namespace Library.management.Service;
 
 public class AuthorService : IAuthurService
 {
-    IAuthorRepo _repo;
+    public readonly IAuthorRepo _repo;
     ResponseData _result;
     public AuthorService(IAuthorRepo repo)
     {
@@ -25,11 +25,11 @@ public class AuthorService : IAuthurService
     {
        
 
-        if (author == null)
+        if (author == null)//if return 
         {
             _result.Message = "Invalid Data";
         }
-        else if (string.IsNullOrEmpty(author.Name))
+        else if (string.IsNullOrEmpty(author.Name))//isnullorwhitespace
         {
             _result.Message = "Author Name is required";
         }
@@ -83,7 +83,7 @@ public class AuthorService : IAuthurService
         return response;
     }
 
-    public async Task<ResponseData> UpdateAsync(Author author)
+    public async Task<ResponseData> UpdateAsync(Author author)//common method
     {
         if (author == null)
         {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contract.ResponceData;
+namespace Assisment.Contract;
 
 public class ResponseData
 {

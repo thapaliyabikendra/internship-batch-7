@@ -8,7 +8,7 @@ namespace Library.management.Service;
 
 public class BookService: IBookService
 {
-    IBookRepo _repo;
+    public readonly IBookRepo _repo;
     ResponseData _result;
     public BookService(IBookRepo repo)
     {
@@ -32,7 +32,7 @@ public class BookService: IBookService
         {
             _result.Message = "BOOK IABN is required";
         }
-        else if (book.PublishedYear==null)
+        else if (book.PublishedYear==0)
         {
             _result.Message = "publish year is required";
         }
@@ -100,7 +100,7 @@ public class BookService: IBookService
         {
             _result.Message = "Book ISBN is required";
         }
-        else if (book.PublishedYear==null)
+        else if (book.PublishedYear==0)
         {
             _result.Message = "Book PublishYear is required";
         }

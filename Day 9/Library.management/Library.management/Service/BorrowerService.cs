@@ -11,7 +11,7 @@ namespace Library.management.Service;
 
 public class BorrowerService : IBorrowerService
 {
-    IBorrowerRepo _repo;
+    public readonly IBorrowerRepo _repo;
     ResponseData _result;
     public BorrowerService(IBorrowerRepo repo)
     {

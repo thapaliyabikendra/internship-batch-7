@@ -9,8 +9,8 @@ namespace Library.management.Repo;
 
 public class AuthorRepo:IAuthorRepo
 {
-    ApplicationDbContext _context;
-    ResponseData _result;
+    public readonly ApplicationDbContext _context;
+    public readonly ResponseData _result;
     public AuthorRepo(ApplicationDbContext context)
     {
         _context = context;
@@ -22,8 +22,8 @@ public class AuthorRepo:IAuthorRepo
     {
         
 
-        _context.AddAsync(author);
-        _context.SaveChangesAsync();
+        await _context.AddAsync(author);
+        await _context.SaveChangesAsync();
 
         _result.Success = true;
         _result.Message = "Data Saved Sucessfullg";
@@ -39,7 +39,7 @@ public class AuthorRepo:IAuthorRepo
         if (data != null) 
         {
             _context.Authors.Remove(data);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             _result.Success = true;
             _result.Message = "Data Sucessfullt Deleted";
 
