@@ -1,6 +1,8 @@
 ﻿using AttendanceManagementSystem.Contracts.Interfaces.User;
 using AttendanceManagementSystem.Domain.Dtos;
 using AttendanceManagementSystem.Domain.Dtos.User;
+using Microsoft.AspNetCore.Authorization;
+//using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +28,7 @@ public class UserController : ControllerBase
     /// <param name="userModel"> user details to be created</param>
     /// <returns> newly created users Id</returns>
     [HttpPost]
+    [Authorize]
     public async Task<ActionResult<ServiceResponseDto<Guid>>> Create([FromBody] UserDto userModel)
     {
         if (!ModelState.IsValid)
@@ -43,6 +46,7 @@ public class UserController : ControllerBase
     /// <returns> return success status </returns>
 
     [HttpPut("{id}")]
+    [Authorize]
     public async Task<ActionResult<ServiceResponseDto<bool>>> Update(
         string id,
         [FromBody] UserDto userModel
@@ -67,6 +71,7 @@ public class UserController : ControllerBase
     /// Retrives all users
     /// </summary>
     /// <returns> a list of users</returns>
+    [Authorize(Policy = "ApiKeyPolicy")]
     [HttpGet("all")]
     public async Task<ActionResult<ServiceResponseDto<IEnumerable<UserDto>>>> GetAll()
     {
@@ -83,6 +88,7 @@ public class UserController : ControllerBase
     /// <param name="id"> The Id of the user to retrive</param>
     /// <returns> a user details</returns>
     [HttpGet("{id}")]
+    [Authorize(Policy = "ApiKeyPolicy")]
     public async Task<ActionResult<ServiceResponseDto<UserDto>>> GetById(string id)
     {
         if (!Guid.TryParse(id, out Guid guidId))
@@ -102,6 +108,7 @@ public class UserController : ControllerBase
     /// <param name="id"> The Id of the user to delete </param>
     /// <returns> returns success status </returns>
     [HttpDelete("{id}")]
+    [Authorize]
     public async Task<ActionResult<ServiceResponseDto<bool>>> Delete(string id)
     {
         if (!Guid.TryParse(id, out Guid guidId))
