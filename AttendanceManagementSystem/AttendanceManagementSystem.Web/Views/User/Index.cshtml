@@ -1,0 +1,29 @@
+﻿@using AttendanceManagementSystem.Shared.Dtos.User
+@model IEnumerable<UserDto>
+
+<h2>All Users</h2>
+
+@if (Model.Any())
+{
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var user in Model)
+            {
+                    <tr>
+                        <td>@user.Name</td>
+                        <td>@user.PhoneNumber</td>
+                    </tr>
+            }
+            </tbody>
+        </table>
+}
+else
+{
+        <p>No users found or unable to load users.</p>
+}
