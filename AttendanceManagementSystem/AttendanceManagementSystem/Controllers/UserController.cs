@@ -1,9 +1,8 @@
 ﻿using AttendanceManagementSystem.Contracts.Interfaces.User;
-using AttendanceManagementSystem.Domain.Dtos;
-using AttendanceManagementSystem.Domain.Dtos.User;
+using AttendanceManagementSystem.Shared.Dtos;
+using AttendanceManagementSystem.Shared.Dtos.User;
 using Microsoft.AspNetCore.Authorization;
 //using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AttendanceManagementSystem.API.Controllers;

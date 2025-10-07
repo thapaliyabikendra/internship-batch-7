@@ -1,5 +1,5 @@
 ﻿using AttendanceManagementSystem.Contracts.Interfaces;
-using AttendanceManagementSystem.Infrastructure.Constants;
+using AttendanceManagementSystem.Shared.Constants;
 using Microsoft.Extensions.Configuration;
 
 namespace AttendanceManagementSystem.Infrastructure.Configurations;

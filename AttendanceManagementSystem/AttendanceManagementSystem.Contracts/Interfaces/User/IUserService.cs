@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AttendanceManagementSystem.Domain.Dtos;
-using AttendanceManagementSystem.Domain.Dtos.User;
+﻿using AttendanceManagementSystem.Shared.Dtos;
+using AttendanceManagementSystem.Shared.Dtos.User;
 
 namespace AttendanceManagementSystem.Contracts.Interfaces.User;
 

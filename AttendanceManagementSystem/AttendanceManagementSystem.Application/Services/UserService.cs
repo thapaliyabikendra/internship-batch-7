@@ -1,8 +1,8 @@
 ﻿using AttendanceManagementSystem.Contracts.Interfaces.User;
 using AttendanceManagementSystem.Contracts.Repository;
-using AttendanceManagementSystem.Domain.Dtos;
-using AttendanceManagementSystem.Domain.Dtos.User;
 using AttendanceManagementSystem.Domain.Entities.Application;
+using AttendanceManagementSystem.Shared.Dtos;
+using AttendanceManagementSystem.Shared.Dtos.User;
 using Microsoft.Extensions.Logging;
 
 namespace AttendanceManagementSystem.Application.Services;

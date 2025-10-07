@@ -1,6 +1,7 @@
 using AttendanceManagementSystem.API.Configurations;
 using AttendanceManagementSystem.Application.Services;
 using AttendanceManagementSystem.Contracts.Interfaces;
+using AttendanceManagementSystem.Contracts.Interfaces.Attendance;
 using AttendanceManagementSystem.Contracts.Interfaces.User;
 using AttendanceManagementSystem.Contracts.Repository;
 using AttendanceManagementSystem.Infrastructure.Configurations;
@@ -41,6 +42,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericEfRepository<>));
 
 builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IAttendanceService, AttendanceService>();
 builder
     .Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthHandler>("BasicAuthentication", null);

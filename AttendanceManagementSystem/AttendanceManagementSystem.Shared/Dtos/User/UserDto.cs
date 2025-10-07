@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using AttendanceManagementSystem.Domain.Entities.Constants;
+using AttendanceManagementSystem.Shared.Constants;
 
-namespace AttendanceManagementSystem.Domain.Dtos.User;
+namespace AttendanceManagementSystem.Shared.Dtos.User;
 
 public record UserDto
 {

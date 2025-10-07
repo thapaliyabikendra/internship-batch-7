@@ -1,4 +1,4 @@
-﻿namespace AttendanceManagementSystem.Domain.Dtos;
+﻿namespace AttendanceManagementSystem.Shared.Dtos;
 
 public class ServiceResponseDto<T>
 {
@@ -6,4 +6,5 @@ public class ServiceResponseDto<T>
     public string Message { get; set; } = string.Empty;
 
     public T? Data { get; set; }
+    //statuscode
 }

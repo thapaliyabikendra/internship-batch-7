@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AttendanceManagementSystem.Domain.Entities.Application;
-using AttendanceManagementSystem.Domain.Entities.Constants;
+﻿using AttendanceManagementSystem.Domain.Entities.Application;
+using AttendanceManagementSystem.Shared.Constants;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace AttendanceManagementSystem.Infrastructure.Data;
 

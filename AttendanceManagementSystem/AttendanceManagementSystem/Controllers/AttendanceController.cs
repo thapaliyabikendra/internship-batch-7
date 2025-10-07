@@ -66,7 +66,7 @@ public class AttendanceController : ControllerBase
     /// </summary>
     /// <param name="userId"></param>
     /// <returns></returns>
-    [HttpPost("check-out/{userId}")] //patch
+    [HttpPatch("check-out/{userId}")]
     public async Task<ActionResult<ServiceResponseDto<AttendanceDto>>> CheckOut(string userId)
     {
         if (!Guid.TryParse(userId, out Guid guidId))

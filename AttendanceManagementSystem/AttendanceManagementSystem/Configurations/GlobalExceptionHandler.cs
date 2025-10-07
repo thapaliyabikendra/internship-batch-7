@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using AttendanceManagementSystem.Infrastructure.Exceptions;
+using AttendanceManagementSystem.Shared.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AttendanceManagementSystem.API.Configurations;

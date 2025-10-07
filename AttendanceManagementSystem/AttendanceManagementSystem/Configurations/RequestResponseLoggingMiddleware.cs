@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AttendanceManagementSystem.API.Configurations;
 
@@ -18,13 +19,17 @@ public class RequestResponseLoggingMiddleware
 
     public async Task Invoke(HttpContext context)
     {
-        // LOG REQUEST
+        // logging the client request
         _logger.LogInformation(await FormatRequest(context.Request));
 
+        //storing response data to use later if needed
         var originalBodyStream = context.Response.Body;
 
         using (var responseBody = new MemoryStream())
         {
+            //replaces the default response stream with a temporary in-memory stream
+            //the response is written directly to the network stream, and once written,  can’t read it back to log it
+            // so, temporarily replace it with a MemoryStream, so it can capture what the controller writes.
             context.Response.Body = responseBody;
 
             // WAIT FOR RESPONSE

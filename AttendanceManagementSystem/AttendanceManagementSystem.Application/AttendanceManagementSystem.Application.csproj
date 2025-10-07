@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AttendanceManagementSystem.Contracts\AttendanceManagementSystem.Contracts.csproj" />
     <ProjectReference Include="..\AttendanceManagementSystem.Domain\AttendanceManagementSystem.Domain.csproj" />
+    <ProjectReference Include="..\AttendanceManagementSystem.Shared\AttendanceManagementSystem.Shared.csproj" />
   </ItemGroup>
 
 </Project>
