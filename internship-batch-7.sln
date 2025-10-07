@@ -2,7 +2,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternshipAPI", "InternshipAPI.csproj", "{3CB6B751-D029-E6B2-D94D-53385EAA9C2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Internship.Api", "src\Internship.Api\Internship.Api.csproj", "{3CB6B751-D029-E6B2-D94D-53385EAA9C2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Internship.Client", "src\Internship.Client\Internship.Client.csproj", "{D86A3498-1C2B-4672-B3C0-0F76F49645BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,6 +16,10 @@ Global
 		{3CB6B751-D029-E6B2-D94D-53385EAA9C2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CB6B751-D029-E6B2-D94D-53385EAA9C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CB6B751-D029-E6B2-D94D-53385EAA9C2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D86A3498-1C2B-4672-B3C0-0F76F49645BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D86A3498-1C2B-4672-B3C0-0F76F49645BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D86A3498-1C2B-4672-B3C0-0F76F49645BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D86A3498-1C2B-4672-B3C0-0F76F49645BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
