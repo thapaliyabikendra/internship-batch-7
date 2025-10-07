@@ -11,11 +11,13 @@ public interface IStudentRepo
 {
     Task<ResponseData> CreateAsync(Student stucent);
 
-    Task<ResponseData> DeleteAsync(int id);
+    Task<ResponseData> DeleteAsync(Student data);
 
-    Task<ResponseData<Student>> GetStudentByIdAsync(int id);
+    Task<Student> GetStudentByIdAsync(int id);
 
     Task<ResponseData<List<Student>>> GetAsync();
 
-    Task<ResponseData> UpdateAsync(int id, Student author);
+    Task<ResponseData> UpdateAsync( Student author);
+
+    IQueryable<Student> GetQueryable();
 }

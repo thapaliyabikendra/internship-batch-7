@@ -1,8 +1,10 @@
 ﻿using Assisment.Contract;
+using Assisment.Contract.Dto;
 using Assisment.Contract.DTOs;
 using Assisment.Contract.Interface.Repo;
 using Assisment.Contract.Interface.Service;
 using Assisment.Entity.Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,7 @@ namespace Assisment.Application.Service;
 
 public class StudentService : IStudentService
 {
-    public readonly IStudentRepo _repo;
+    private readonly IStudentRepo _repo;
 
     public StudentService(IStudentRepo repo)
     {
@@ -24,38 +26,20 @@ public class StudentService : IStudentService
     /// Validates the StudentDTO object to ensure all required fields are present.
     /// Returns a ResponseData of string indicating success or the validation message.
     /// </summary>
-    private static ResponseData<string> ValidateStudentDto(StudentDTO dto)
+    private static ResponseData<string> ValidateStudentInput(string? name, string? gender, string? email, string? address)
     {
-        if (dto == null)
-        {
-            return new ResponseData<string> { Success = false, Message = "Student data is missing" };
-        }
-            
+        if (string.IsNullOrWhiteSpace(name))
+            return new ResponseData<string> { Success = false, Message = "Name is required" };
 
-        if (string.IsNullOrEmpty(dto.Name))
-        {
-            return new ResponseData<string> { Success = false, Message = "Name is missing" };
+        if (string.IsNullOrWhiteSpace(gender))
+            return new ResponseData<string> { Success = false, Message = "Gender is required" };
 
-        }
-           
+        if (string.IsNullOrWhiteSpace(email))
+            return new ResponseData<string> { Success = false, Message = "Email is required" };
 
-        if (string.IsNullOrEmpty(dto.Gender))
-        {
-            return new ResponseData<string> { Success = false, Message = "Gender is missing" };
-        }
+        if (string.IsNullOrWhiteSpace(address))
+            return new ResponseData<string> { Success = false, Message = "Address is required" };
 
-
-        if (string.IsNullOrEmpty(dto.Email)) 
-        { 
-            return new ResponseData<string> { Success = false, Message = "Email is missing" };
-        }
-
-
-        if (string.IsNullOrEmpty(dto.Address))
-        {
-            return new ResponseData<string> { Success = false, Message = "Address is missing" };
-        }
- 
         return new ResponseData<string> { Success = true };
     }
 
@@ -65,38 +49,56 @@ public class StudentService : IStudentService
     /// Validates the input DTO and calls the repository to persist the student.
     /// Returns a ResponseData containing the success status and message.
     /// </summary>
-    public async Task<ResponseData<StudentDTO>> CreateAsync(StudentDTO dto)
+    public async Task<ResponseData<StudentDTO>> CreateAsync(CreateStudentDto dto)
     {
-        ResponseData < StudentDTO > response=new ResponseData<StudentDTO> ();
-        var validation = ValidateStudentDto(dto);
+        //ResponseData < StudentDTO > response=new ResponseData<StudentDTO> ();
 
-        if ( !validation.Success)
+        dto.Name = dto.Name?.Trim();
+        dto.Gender = dto.Gender?.Trim();
+        dto.Email = dto.Email?.Trim();
+        dto.Address = dto.Address?.Trim();
+
+       var validation = ValidateStudentInput(dto.Name, dto.Gender, dto.Email, dto.Address); ;
+
+
+
+        if (!validation.Success)
         {
-            response.Success = validation.Success;
-            response.Message = validation.Message;
-            return response;
+            return new ResponseData<StudentDTO>
+            {
+                Success = validation.Success,
+                Message = validation.Message
+            };
+
+        }
+        try
+        {
+            var student = new Student
+            {
+                Name = dto.Name!,
+                Gender = dto.Gender!,
+                Email = dto.Email!,
+                Address = dto.Address!,
+                CreateDate = DateTime.UtcNow,
+                IsActive = true
+            };
+
+            var result = await _repo.CreateAsync(student);
+
+
+            return new ResponseData<StudentDTO>
+            {
+                Success = result.Success,
+                Message = result.Message,
+
+            };
+        }
+        catch (Exception ex)
+        {
+
+            throw;
         }
 
-        var student = new Student
-        {
-            Name = dto.Name!.Trim(),
-            Gender = dto.Gender!.Trim(),
-            Email = dto.Email!.Trim(),
-            Address = dto.Address!.Trim(),
-            CreateDate = DateTime.Now,
-            IsActive = true
-        };
-
-
-        var result=await _repo.CreateAsync(student);
-
-
-        return new ResponseData<StudentDTO>
-        {
-            Success = result.Success,
-            Message = result.Message,
-            
-        };
     }
 
     /// <summary>
@@ -106,16 +108,38 @@ public class StudentService : IStudentService
     /// </summary>
     public async Task<ResponseData> DeleteAsync(int id)
     {
-        ResponseData response=new ResponseData();
-        if (id == 0)
+        try
         {
-            response.Success = false;
-            response.Message = "The id is not given";
-            return response;
+            if (id == 0)
+            {
+                return new ResponseData
+                {
+                    Success = false,
+                    Message = "Student Id not provided."
+                };
+
+            }
+
+            var student = await _repo.GetStudentByIdAsync(id);
+
+            if (student == null)
+            {
+                return new ResponseData
+                {
+                    Success = false,
+                    Message = "Student Id not found."
+                };
+            }
+
+            var result = await _repo.DeleteAsync(student);
+            return result;
+
+        }
+        catch (Exception ex)
+        {
+            throw;
         }
 
-        var result = await _repo.DeleteAsync(id);
-        return result;
     }
 
     /// <summary>
@@ -123,38 +147,38 @@ public class StudentService : IStudentService
     /// Accepts a page number and fetches the corresponding page of students.
     /// Returns a ResponseData containing a list of StudentDTOs, success status, and message.
     /// </summary>
-    public async Task<ResponseData<List<StudentDTO>>> GetAsync(int pageNumber = 1)
+    public async Task<ResponseData<List<StudentDTO>>> GetAsync()
     {
-        int pageSize = 2;
 
-        ResponseData<List<StudentDTO>> response= new ResponseData<List<StudentDTO>>();
 
-        ResponseData<List<Student>> data=await _repo.GetAsync();
+        ResponseData<List<StudentDTO>> response = new ResponseData<List<StudentDTO>>();
+
+        ResponseData<List<Student>> data = await _repo.GetAsync();
 
         if (data.Data == null)
         {
-            response.Success=data.Success;
+            response.Success = data.Success;
             response.Message = data.Message;
             return response;
         }
-        
-            var totalRecords = data.Data.Count;
-            var totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
 
-            response.Success = data.Success;
-            response.Message = data.Message;
 
-            response.Data = data.Data.Skip((pageNumber - 1) * pageSize).Take(pageSize)
-                .Select(s => new StudentDTO
-                {
-                    Name = s.Name,
-                    Gender = s.Gender,
-                    Email = s.Email,
-                    Address = s.Address,
 
-                }).ToList();
-        
-        
+        response.Success = data.Success;
+        response.Message = data.Message;
+
+        response.Data = data.Data
+            .Select(s => new StudentDTO
+            {
+                Id=s.Id,
+                Name = s.Name,
+                Gender = s.Gender,
+                Email = s.Email,
+                Address = s.Address,
+
+            }).ToList();
+
+
 
         return response;
 
@@ -167,27 +191,31 @@ public class StudentService : IStudentService
     /// </summary>
     public async Task<ResponseData<StudentDTO>> GetStudentByIdAsync(int id)
     {
-        ResponseData<StudentDTO> response = new ResponseData<StudentDTO>();
-        var data=await _repo.GetStudentByIdAsync(id);
+        var student = await _repo.GetStudentByIdAsync(id);
 
-        if(data.Data==null)
+        if (student == null)
         {
-            response.Success = data.Success;
-            response.Message = data.Message;
-            return response;
+            return new ResponseData<StudentDTO>
+            {
+                Success = false,
+                Message = "Student not found"
+            };
         }
 
-        response.Success = data.Success;
-        response.Message = data.Message;
-        response.Data =  new StudentDTO
+        var studentDto = new StudentDTO
         {
-            Name = data.Data.Name,
-            Gender = data.Data.Gender,
-            Email = data.Data.Email,
-            Address = data.Data.Address,
+            Name = student.Name,
+            Gender = student.Gender,
+            Email = student.Email,
+            Address = student.Address
         };
 
-        return response;
+        return new ResponseData<StudentDTO>
+        {
+            Success = true,
+            Message = "Student retrieved successfully",
+            Data = studentDto
+        };
     }
 
     /// <summary>
@@ -197,45 +225,93 @@ public class StudentService : IStudentService
     /// </summary>
     public async Task<ResponseData<StudentDTO>> UpdateAsync(int id, StudentDTO dto)
     {
-        ResponseData<StudentDTO> response = new ResponseData<StudentDTO>();
+        dto.Name = dto.Name?.Trim();
+        dto.Gender = dto.Gender?.Trim();
+        dto.Email = dto.Email?.Trim();
+        dto.Address = dto.Address?.Trim();
+
         if (id == 0)
         {
-            response.Success=false;
-            response.Message = "Id is not given for update";
-            return response;
+            return new ResponseData<StudentDTO>
+            {
+                Success = false,
+                Message = "Id is not given for update"
+            };
+
         }
 
-        var validation = ValidateStudentDto(dto);
+        var validation = ValidateStudentInput(dto.Name, dto.Gender, dto.Email, dto.Address);
 
         if (!validation.Success)
         {
-            response.Success = validation.Success;
-            response.Message = validation.Message;
-            return response;
+            return new ResponseData<StudentDTO>
+            {
+                Success = validation.Success,
+                Message = validation.Message
+            };
+
         }
 
-        var student = new Student
+        var existingStudent = await _repo.GetStudentByIdAsync(id);
+        if (existingStudent == null)
         {
-            Name = dto.Name!.Trim(),
-            Gender = dto.Gender!.Trim(),
-            Email = dto.Email!.Trim(),
-            Address = dto.Address!.Trim(),
+            return new ResponseData<StudentDTO>
+            {
+                Success = false,
+                Message = "Student not found"
+            };
+
+
+        }
+
+        // Map updated fields
+        existingStudent.Name = dto.Name!;
+        existingStudent.Gender = dto.Gender!;
+        existingStudent.Email = dto.Email!;
+        existingStudent.Address = dto.Address!;
+        existingStudent.ModifiedDate = DateTime.UtcNow;
+
+        // Call repo to update
+        var isUpdated = await _repo.UpdateAsync(existingStudent);
+
+
+        return new ResponseData<StudentDTO>
+        {
+            Success = isUpdated.Success,
+            Message = isUpdated.Message
         };
 
-        var repoResponse = await _repo.UpdateAsync(id, student);
+    }
 
-        if (!repoResponse.Success)
+
+    public async Task<PaginatedResponse<StudentDTO>> GetPaginatedAsync(int pageNumber = 1, int pageSize = 10)
+    {
+        var query = _repo.GetQueryable();
+
+        var totalRecords = await query.CountAsync();
+        var totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+
+        var students = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .Select(s => new StudentDTO
+            {
+                Name = s.Name,
+                Gender = s.Gender,
+                Email = s.Email,
+                Address = s.Address
+            })
+            .ToListAsync();
+
+        return new PaginatedResponse<StudentDTO>
         {
-            response.Success=repoResponse.Success;
-            response.Message = repoResponse.Message;
-            return response;
-        }
-
-        response.Success = true;
-        response.Message = repoResponse.Message;
-       
-
-        return response;
-
+            Success = true,
+            Message = $"Page {pageNumber} of {totalPages}",
+            Data = students,
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+            TotalRecords = totalRecords,
+            TotalPages = totalPages
+        };
     }
 }

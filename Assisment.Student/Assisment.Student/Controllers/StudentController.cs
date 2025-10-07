@@ -1,18 +1,21 @@
 ﻿using Assisment.Contract;
+using Assisment.Contract.Dto;
 using Assisment.Contract.DTOs;
 using Assisment.Contract.Interface.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Assisment.Student.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
+[ApiKey]
 public class StudentController : ControllerBase
 {
-    public readonly IStudentService Service;
+    private readonly IStudentService _service;//private
     public StudentController(IStudentService service)
     {
-        Service = service;
+        _service = service;
     }
 
     /// <summary>
@@ -22,11 +25,15 @@ public class StudentController : ControllerBase
     /// </summary>
 
     [HttpPost]
-    public async Task<ResponseData<StudentDTO>> CreateAsync([FromBody] StudentDTO dto)
+    //[Authorize]
+    public async Task<ActionResult<ResponseData<StudentDTO>>> CreateAsync([FromBody] CreateStudentDto dto)
     {
-        ResponseData<StudentDTO> data = await Service.CreateAsync(dto);
+        ResponseData<StudentDTO> result = await _service.CreateAsync(dto);
 
-        return data;
+        if (result.Success)
+            return StatusCode(StatusCodes.Status201Created, result); // 201 Created
+
+        return BadRequest(result);
     }
 
     /// <summary>
@@ -36,11 +43,16 @@ public class StudentController : ControllerBase
     /// </summary>
 
     [HttpDelete("{id}")]
-    public async Task<ResponseData> DeleteAsync(int id)
+    //[Authorize]
+    public async Task<ActionResult<ResponseData>> DeleteAsync(int id)
     {
-        ResponseData data = await Service.DeleteAsync(id);
+        ResponseData result = await _service.DeleteAsync(id);
 
-        return data;
+        if (result.Success)
+            return Ok(result);      
+
+        return BadRequest(result);
+       
     }
 
 
@@ -51,10 +63,14 @@ public class StudentController : ControllerBase
     /// </summary>
     
     [HttpGet]
-    public async Task<ResponseData<List<StudentDTO>>> GetAsync(int pageNumber)
+    //[Authorize]
+    public async Task<ActionResult<ResponseData<List<StudentDTO>>>> GetAsync()
     {
-        ResponseData<List<StudentDTO>> data =await Service.GetAsync(pageNumber);
-        return data;
+        ResponseData<List<StudentDTO>> result =await _service.GetAsync();
+        if (result.Success)
+            return Ok(result);      // 200
+
+        return BadRequest(result);
     }
 
 
@@ -65,11 +81,15 @@ public class StudentController : ControllerBase
     /// </summary>
 
     [HttpGet("{id}")]
-    public async Task<ResponseData<StudentDTO>> GetStudentByIdAsync(int id)
+    //[Authorize]
+    public async Task<ActionResult<ResponseData<StudentDTO>>> GetStudentByIdAsync(int id)
     {
-        ResponseData<StudentDTO> data = await Service.GetStudentByIdAsync(id);
+        ResponseData<StudentDTO> result = await _service.GetStudentByIdAsync(id);
 
-        return data;
+        if (result.Success)
+            return Ok(result);   
+
+        return NotFound(result);
     }
 
     /// <summary>
@@ -79,9 +99,27 @@ public class StudentController : ControllerBase
     /// </summary>
 
     [HttpPut("{id}")]
-    public async Task<ResponseData<StudentDTO>> UpdateAsync(int id, [FromBody] StudentDTO dto)
+   // [Authorize]
+    public async Task<ActionResult<ResponseData<StudentDTO>>> UpdateAsync(int id, [FromBody] StudentDTO dto)
     {
-        ResponseData<StudentDTO> data= await Service.UpdateAsync(id, dto);
-        return data;
+        ResponseData<StudentDTO> result= await _service.UpdateAsync(id, dto);
+        if (result.Success)
+            return Ok(result);     
+
+        return BadRequest(result);
+    }
+
+    [HttpGet("paginated")]
+    
+    public async Task<ActionResult<PaginatedResponse<StudentDTO>>> GetPaginatedAsync(
+    [FromQuery] int pageNumber = 1,
+    [FromQuery] int pageSize = 10)
+    {
+        var result = await _service.GetPaginatedAsync(pageNumber, pageSize);
+
+        if (result.Success)
+            return Ok(result);
+
+        return BadRequest(result);
     }
 }

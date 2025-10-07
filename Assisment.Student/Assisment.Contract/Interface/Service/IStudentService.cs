@@ -1,4 +1,5 @@
-﻿using Assisment.Contract.DTOs;
+﻿using Assisment.Contract.Dto;
+using Assisment.Contract.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Assisment.Contract.Interface.Service;
 
 public interface IStudentService
 {
-    Task<ResponseData<StudentDTO>> CreateAsync(StudentDTO dto);
+    Task<ResponseData<StudentDTO>> CreateAsync(CreateStudentDto dto);
 
   
     Task<ResponseData> DeleteAsync(int id);
@@ -18,8 +19,10 @@ public interface IStudentService
     Task<ResponseData<StudentDTO>> GetStudentByIdAsync(int id);
 
    
-    Task<ResponseData<List<StudentDTO>>> GetAsync(int pageNumber);
+    Task<ResponseData<List<StudentDTO>>> GetAsync();
 
     
     Task<ResponseData<StudentDTO>> UpdateAsync(int id, StudentDTO dto);
+
+    Task<PaginatedResponse<StudentDTO>> GetPaginatedAsync(int pageNumber = 1, int pageSize = 10);
 }

@@ -13,7 +13,7 @@ namespace Assisment.Infrastructure.Repo;
 
 public class StudentRepo: IStudentRepo
 {
-    public readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext _context;
     
     public StudentRepo(ApplicationDbContext context)
     {
@@ -25,35 +25,39 @@ public class StudentRepo: IStudentRepo
     public async Task<ResponseData> CreateAsync(Student student)
     {
 
-        ResponseData response = new ResponseData();
+        
         await _context.AddAsync(student);
         await _context.SaveChangesAsync();
+        return new ResponseData()
+        {
+            Success = true,
+            Message = "Data Saved Sucessfully",
+        };
+        
 
-        response.Success = true;
-        response.Message = "Data Saved Sucessfullg";
-
-        return response;
     }
 
-    public async Task<ResponseData> DeleteAsync(int id)
+    public async Task<ResponseData> DeleteAsync(Student data)
     {
-        ResponseData response=new ResponseData();
-        var data = await _context.Students.Where(a => a.Id == id && a.IsActive==true).FirstOrDefaultAsync();
+        try
+        {
+            
+            _context.Students.Remove(data);
+            await _context.SaveChangesAsync();
 
-        if (data == null)
+            return new ResponseData()
+            {
+                Success = true,
+                Message = "Data Sucessfullt Deleted"
+            };
+        }
+        catch (Exception ex) 
         {
 
-            response.Success = false;
-            response.Message = "Data not found";
-            return response;
-
+            throw;
         }
-
-        _context.Students.Remove(data);
-        await _context.SaveChangesAsync();
-        response.Success = true;
-        response.Message = "Data Sucessfullt Deleted";
-        return response;
+       
+       
     }
 
     public async Task<ResponseData<List<Student>>> GetAsync()
@@ -79,52 +83,47 @@ public class StudentRepo: IStudentRepo
         return response;
     }
 
-    public async Task<ResponseData<Student>> GetStudentByIdAsync(int id)
+    public async Task<Student> GetStudentByIdAsync(int id)
     {
-        var data = await _context.Students.Where(a => a.Id == id && a.IsActive==true).FirstOrDefaultAsync();
+        return await _context.Students
+        .Where(s => s.Id == id && s.IsActive)
+        .FirstOrDefaultAsync();
 
-        ResponseData<Student> response = new ResponseData<Student>();
+    }
 
-        if (data == null)
+
+    public async Task<ResponseData> UpdateAsync(Student student)
+    {
+        try
         {
-            response.Success = false;
-            response.Message = "Data not found";
+            _context.Update(student); // or _context.Students.Update(student)
+            var updated = await _context.SaveChangesAsync() > 0;
+
+            if (updated)
+            {
+                return new ResponseData{
+                    Success = true,
+                    Message = "Student updated successfully"
+                };
+                
+            }
+            return new ResponseData
+            {
+                Success = false,
+                Message = "Update failed"
+            };
+           
             
-
-            return response;
-
         }
-        response.Success = true;
-        response.Data = data;
-        return response;
-    }
-
-
-    public async Task<ResponseData> UpdateAsync(int id, Student student)
-    {
-        ResponseData response=new ResponseData();
-        var existing = await _context.Students.FirstOrDefaultAsync(a => a.Id == id);
-
-        if (existing == null)
+        catch (Exception ex)
         {
-            response.Message = "Data not found";
-            response.Success = false;
-            return response;
+            throw;
         }
-
-        existing.Name=student.Name;
-        existing.IsActive=student.IsActive;
-        existing.ModifiedDate=DateTime.Now;
-        existing.Email=student.Email;
-        existing.Address=student.Address;
-        existing.Gender=student.Gender;
-
-        await _context.SaveChangesAsync();
-
-        response.Success = true;
-        response.Message = "Data Updated Successfully";
-        return response;
-
     }
 
+
+    public IQueryable<Student> GetQueryable()
+    {
+        return _context.Students.Where(s => s.IsActive); 
+    }
 }

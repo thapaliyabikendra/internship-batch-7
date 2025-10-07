@@ -17,8 +17,22 @@ namespace Assisment.Student.Middleware
 
         public async Task Invoke(HttpContext httpContext)
         {
-            _logger.LogInformation("{Method} {Path}", httpContext.Request.Method, httpContext.Request.Path);
-            await _next(httpContext);
+            try
+            {
+                _logger.LogInformation("{Method} {Path}", httpContext.Request.Method, httpContext.Request.Path);
+                await _next(httpContext);
+
+                _logger.LogInformation("Response Status Code: {StatusCode}", httpContext.Response.StatusCode);
+            }
+            catch(Exception ex)
+            {
+                // Log Exception
+                _logger.LogError(ex, "Unhandled exception occurred while processing {Method} {Path}",
+                    httpContext.Request.Method, httpContext.Request.Path);
+
+                
+            }
+           
         }
     }
 
