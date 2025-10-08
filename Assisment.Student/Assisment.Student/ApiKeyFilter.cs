@@ -22,7 +22,7 @@ public class ApiKeyFilter : IAsyncActionFilter
 
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
-        // Get API key from configuration
+        
         var configuredKey = _configuration["Authentication:ApiKey"];
 
         // Check if header exists
@@ -47,7 +47,7 @@ public class ApiKeyFilter : IAsyncActionFilter
             return;
         }
 
-        // Continue to controller action
+       
         await next();
     }
 }

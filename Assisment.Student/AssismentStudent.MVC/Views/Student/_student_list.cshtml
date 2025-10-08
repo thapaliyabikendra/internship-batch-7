@@ -1,0 +1,33 @@
+﻿@model IEnumerable<StudentViewModel>
+@{
+    int count = 1;
+}
+
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>@count</td>
+            <td>@item.Name</td>
+            <td>@item.Email</td>
+            <td>@item.Address</td>
+            <td>@item.Gender</td>
+            <td>
+                <button class="btn btn-sm btn-success me-2 editbtn" data-id="@item.Id">
+                    Edit
+                </button>
+                <button class="btn btn-sm btn-danger btndelete" data-id="@item.Id">
+                    Delete
+                </button>
+            </td>
+        </tr>
+        count++;
+    }
+}
+else
+{
+    <tr>
+        <td colspan="6" class="text-center text-muted">No students found.</td>
+    </tr>
+}
