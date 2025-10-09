@@ -1,0 +1,80 @@
+﻿@model MVC.Models.StudentModel
+
+<h4>StudentModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <!-- Changed to Create for clarity -->
+
+            <input asp-for="id" class="form-control" hidden/>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <input asp-for="Gender" class="form-control" />
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RollNumber" class="control-label"></label>
+                <input asp-for="RollNumber" class="form-control" />
+                <span asp-validation-for="RollNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Grade" class="control-label"></label>
+                <input asp-for="Grade" class="form-control" />
+                <span asp-validation-for="Grade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-8">
+        <h4>Student List</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Gender</th>
+                    <th>Roll Number</th>
+                    <th>Grade</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                    <tr>
+                        <td>1</td>
+                        <td>Ram</td>
+                        <td>shrd</td>
+                        <td>Male</td>
+                        <td>12</td>
+                        <td>2</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="" class="btn btn-sm btn-warning">Edit</a>
+                            <a asp-action="Delete" asp-route-id="" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
