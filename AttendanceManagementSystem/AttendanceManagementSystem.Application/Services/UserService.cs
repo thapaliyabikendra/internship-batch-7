@@ -132,20 +132,21 @@ public class UserService : IUserService
     /// Retrives all users
     /// </summary>
     /// <returns> returns a list of Users</returns>
-    public async Task<ServiceResponseDto<IEnumerable<UserDto>>> GetAllAsync()
+    public async Task<ServiceResponseDto<IEnumerable<GetUserDto>>> GetAllAsync()
     {
         _logger.LogDebug("Fetching all users");
 
         try
         {
             var users = await _userRepo.GetAllAsync();
-            var usersDto = users.Select(x => new UserDto
+            var usersDto = users.Select(x => new GetUserDto
             {
+                Id = x.Id,
                 Name = x.Name,
                 PhoneNumber = x.PhoneNumber,
             });
             _logger.LogInformation(" Users retrieved successfully");
-            return new ServiceResponseDto<IEnumerable<UserDto>>
+            return new ServiceResponseDto<IEnumerable<GetUserDto>>
             {
                 Data = usersDto,
                 IsSuccess = true
@@ -164,7 +165,7 @@ public class UserService : IUserService
     /// <param name="id"> The Id of the user to retrive</param>
     /// <returns>  user detail</returns>
 
-    public async Task<ServiceResponseDto<UserDto>> GetByIdAsync(Guid id)
+    public async Task<ServiceResponseDto<GetUserDto>> GetByIdAsync(Guid id)
     {
         _logger.LogDebug("Fetching User by id: {UserId}", id);
 
@@ -172,12 +173,21 @@ public class UserService : IUserService
         if (user == null)
         {
             _logger.LogWarning("User with id {UserId} not found", id);
-            return new ServiceResponseDto<UserDto> { IsSuccess = false, Message = "Id not found" };
+            return new ServiceResponseDto<GetUserDto>
+            {
+                IsSuccess = false,
+                Message = "Id not found"
+            };
         }
-        var userDto = new UserDto { Name = user.Name, PhoneNumber = user.PhoneNumber, };
+        var userDto = new GetUserDto
+        {
+            Id = user.Id,
+            Name = user.Name,
+            PhoneNumber = user.PhoneNumber,
+        };
 
         _logger.LogInformation("User with id {UserId} retrieved successfully", id);
-        return new ServiceResponseDto<UserDto> { Data = userDto, IsSuccess = true };
+        return new ServiceResponseDto<GetUserDto> { Data = userDto, IsSuccess = true };
     }
 
     /// <summary>

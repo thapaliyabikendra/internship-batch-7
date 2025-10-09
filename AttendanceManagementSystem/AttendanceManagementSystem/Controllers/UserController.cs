@@ -27,7 +27,7 @@ public class UserController : ControllerBase
     /// <param name="userModel"> user details to be created</param>
     /// <returns> newly created users Id</returns>
     [HttpPost]
-    [Authorize]
+    // [Authorize]
     public async Task<ActionResult<ServiceResponseDto<Guid>>> Create([FromBody] UserDto userModel)
     {
         if (!ModelState.IsValid)
@@ -45,7 +45,7 @@ public class UserController : ControllerBase
     /// <returns> return success status </returns>
 
     [HttpPut("{id}")]
-    [Authorize]
+    //[Authorize]
     public async Task<ActionResult<ServiceResponseDto<bool>>> Update(
         string id,
         [FromBody] UserDto userModel
@@ -72,7 +72,7 @@ public class UserController : ControllerBase
     /// <returns> a list of users</returns>
     [Authorize(Policy = "ApiKeyPolicy")]
     [HttpGet("all")]
-    public async Task<ActionResult<ServiceResponseDto<IEnumerable<UserDto>>>> GetAll()
+    public async Task<ActionResult<ServiceResponseDto<IEnumerable<GetUserDto>>>> GetAll()
     {
         var result = await _userService.GetAllAsync();
         if (result.IsSuccess)
@@ -88,7 +88,7 @@ public class UserController : ControllerBase
     /// <returns> a user details</returns>
     [HttpGet("{id}")]
     [Authorize(Policy = "ApiKeyPolicy")]
-    public async Task<ActionResult<ServiceResponseDto<UserDto>>> GetById(string id)
+    public async Task<ActionResult<ServiceResponseDto<GetUserDto>>> GetById(string id)
     {
         if (!Guid.TryParse(id, out Guid guidId))
         {
@@ -107,7 +107,7 @@ public class UserController : ControllerBase
     /// <param name="id"> The Id of the user to delete </param>
     /// <returns> returns success status </returns>
     [HttpDelete("{id}")]
-    [Authorize]
+    //[Authorize]
     public async Task<ActionResult<ServiceResponseDto<bool>>> Delete(string id)
     {
         if (!Guid.TryParse(id, out Guid guidId))

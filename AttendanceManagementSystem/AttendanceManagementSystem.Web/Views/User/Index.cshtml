@@ -1,23 +1,54 @@
 ﻿@using AttendanceManagementSystem.Shared.Dtos.User
-@model IEnumerable<UserDto>
+@model IEnumerable<GetUserDto>
 
 <h2>All Users</h2>
+<hr />
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error:</strong> @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error:</strong> @ViewBag.Error
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary" >Create New</a>
+</p>
 
 @if (Model.Any())
 {
-        <table class="table table-bordered">
-            <thead>
+    <table class="table table-bordered table-hover mb-0 align-content-center ">
+
+        <thead class="table-light">
                 <tr>
-                    <th>Name</th>
-                    <th>Phone Number</th>
+                <th style="display:none">@Html.DisplayNameFor(model => model.Id)</th>
+                <th> @Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                <th>Action</th>
+
                 </tr>
             </thead>
             <tbody>
             @foreach (var user in Model)
             {
                     <tr>
-                        <td>@user.Name</td>
+                    <td style="display:none">@user.Id</td>
+                    <td>  <span class="fw-bold">@user.Name</span></td>
                         <td>@user.PhoneNumber</td>
+                    <td >
+                        <a asp-action="Update" class="btn btn-primary m-lg-2 " asp-route-id="@user.Id">Update</a>
+
+                        <a asp-action="Delete" class="btn btn-danger m-lg-2 " asp-route-id="@user.Id">Delete</a>
+                    </td>
                     </tr>
             }
             </tbody>

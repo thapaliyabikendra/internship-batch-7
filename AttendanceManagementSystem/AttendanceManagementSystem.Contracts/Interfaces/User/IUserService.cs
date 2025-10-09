@@ -11,7 +11,7 @@ public interface IUserService
 
     Task<ServiceResponseDto<bool>> DeleteAsync(Guid id);
 
-    Task<ServiceResponseDto<IEnumerable<UserDto>>> GetAllAsync();
+    Task<ServiceResponseDto<IEnumerable<GetUserDto>>> GetAllAsync();
 
-    Task<ServiceResponseDto<UserDto>> GetByIdAsync(Guid id);
+    Task<ServiceResponseDto<GetUserDto>> GetByIdAsync(Guid id);
 }

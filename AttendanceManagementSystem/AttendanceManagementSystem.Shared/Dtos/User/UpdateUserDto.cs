@@ -1,10 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using AttendanceManagementSystem.Shared.Constants;
 
 namespace AttendanceManagementSystem.Shared.Dtos.User;
 
-public record UserDto
+public class UpdateUserDto
 {
+    public Guid Id { get; set; }
+
     [Required]
     [MaxLength(UserConsts.Name.MaxLength)]
     [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Name must contain only letters.")]
