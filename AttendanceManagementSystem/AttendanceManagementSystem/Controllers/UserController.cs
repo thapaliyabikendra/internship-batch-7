@@ -67,14 +67,16 @@ public class UserController : ControllerBase
     }
 
     /// <summary>
-    /// Retrives all users
+    /// Retrives users with pagination
     /// </summary>
     /// <returns> a list of users</returns>
     [Authorize(Policy = "ApiKeyPolicy")]
-    [HttpGet("all")]
-    public async Task<ActionResult<ServiceResponseDto<IEnumerable<GetUserDto>>>> GetAll()
+    [HttpGet("List")]
+    public async Task<ActionResult<ServiceResponseDto<PagedResponseDto<List<GetUserDto>>>>> GetList(
+        [FromQuery] PagedRequestDto input
+    )
     {
-        var result = await _userService.GetAllAsync();
+        var result = await _userService.GetListAsync(input);
         if (result.IsSuccess)
             return Ok(result);
 

@@ -1,5 +1,7 @@
-﻿using AttendanceManagementSystem.Shared.Dtos;
+﻿using System.Reflection;
+using AttendanceManagementSystem.Shared.Dtos;
 using AttendanceManagementSystem.Shared.Dtos.User;
+using AttendanceManagementSystem.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AttendanceManagementSystem.Web.Controllers;
@@ -32,7 +34,7 @@ public class UserController : Controller
     {
         if (!ModelState.IsValid)
         {
-            ViewBag.Error = "Please provide valid data";
+            TempData["Error"] = "Please provide valid data";
             return View();
         }
 
@@ -42,9 +44,10 @@ public class UserController : Controller
         var response = await client.PostAsync("user", content);
         if (!response.IsSuccessStatusCode)
         {
-            ViewBag.Error = "User not created";
+            TempData["Error"] = "User not created";
             return View(user);
         }
+        TempData["Success"] = "User created successfully";
         return RedirectToAction(nameof(Index));
     }
 
@@ -53,17 +56,27 @@ public class UserController : Controller
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int pageNumber)
     {
         var client = _clientFactory.CreateClient("AttendanceApi");
-        var response = await client.GetAsync("user/all");
+
+        int pageSize = 4;
+        if (pageNumber < 1)
+        {
+            pageNumber = 1;
+        }
+
+        int skipCount = (pageNumber - 1) * pageSize;
+        var response = await client.GetAsync(
+            $"user/list?SkipCount={skipCount}&MaxResultCount={pageSize}"
+        );
         if (!response.IsSuccessStatusCode)
         {
             ViewBag.Error = "Unable to fetch users.";
             return View(new List<GetUserDto>());
         }
         var result = await response.Content.ReadFromJsonAsync<
-            ServiceResponseDto<IEnumerable<GetUserDto>>
+            ServiceResponseDto<PagedResponseDto<GetUserDto>>
         >();
 
         if (result == null || !result.IsSuccess || result.Data == null)
@@ -71,8 +84,17 @@ public class UserController : Controller
             ViewBag.Error = result?.Message;
             return View(new List<GetUserDto>());
         }
+        //viewmodel
+        var PagedResult = new UserViewModel
+        {
+            User = result.Data.Items,
+            TotalItems = result.Data.TotalCount,
+            TotalPages = (int)Math.Ceiling((double)result.Data.TotalCount / pageSize),
+            PageIndex = pageNumber,
+            PageSize = pageSize
+        };
 
-        return View(result.Data);
+        return View(PagedResult);
     }
 
     private async Task<ServiceResponseDto<GetUserDto>> Details(string id)
@@ -109,6 +131,7 @@ public class UserController : Controller
             TempData["Error"] = userDetail.Message;
             return RedirectToAction(nameof(Index));
         }
+
         return View(userDetail.Data);
     }
 
@@ -135,6 +158,8 @@ public class UserController : Controller
             TempData["Error"] = result?.Message ?? "Unable to delete user";
             return RedirectToAction(nameof(Index));
         }
+        TempData["Success"] = result?.Message ?? "User Deleted Successfully";
+
         return RedirectToAction(nameof(Index));
     }
 
@@ -181,6 +206,7 @@ public class UserController : Controller
             TempData["Error"] = result?.Message ?? "Unable to update user";
             return RedirectToAction(nameof(Index));
         }
+        TempData["Success"] = result?.Message ?? "User Updated Successfully";
         return RedirectToAction(nameof(Index));
     }
 }

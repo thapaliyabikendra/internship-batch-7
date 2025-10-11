@@ -3,6 +3,7 @@ using AttendanceManagementSystem.Contracts.Repository;
 using AttendanceManagementSystem.Domain.Entities.Application;
 using AttendanceManagementSystem.Shared.Dtos;
 using AttendanceManagementSystem.Shared.Dtos.User;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace AttendanceManagementSystem.Application.Services;
@@ -188,6 +189,44 @@ public class UserService : IUserService
 
         _logger.LogInformation("User with id {UserId} retrieved successfully", id);
         return new ServiceResponseDto<GetUserDto> { Data = userDto, IsSuccess = true };
+    }
+
+    /// <summary>
+    /// Retrives user with pagination
+    /// </summary>
+    /// <param name="input"> refers to pagination logic object, contains Skip and MaxResultCount</param>
+    /// <returns> a list of users with total count</returns>
+
+    public async Task<ServiceResponseDto<PagedResponseDto<GetUserDto>>> GetListAsync(
+        PagedRequestDto input
+    )
+    {
+        _logger.LogInformation("Fetching {UserCount} users with pagination", input.MaxResultCount);
+        var query = _userRepo.GetQueryable();
+
+        var totalCount = query.Count();
+        var users = await query
+            .OrderBy(x => x.AddedDate)
+            .Select(x => new GetUserDto
+            {
+                Id = x.Id,
+                Name = x.Name,
+                PhoneNumber = x.PhoneNumber,
+            })
+            .Skip(input.SkipCount)
+            .Take(input.MaxResultCount)
+            .ToListAsync();
+        var pagedResponse = new PagedResponseDto<GetUserDto>
+        {
+            Items = users,
+            TotalCount = totalCount,
+        };
+        _logger.LogInformation("{UserCount} Users retrieved successfully", input.MaxResultCount);
+        return new ServiceResponseDto<PagedResponseDto<GetUserDto>>
+        {
+            Data = pagedResponse,
+            IsSuccess = true
+        };
     }
 
     /// <summary>

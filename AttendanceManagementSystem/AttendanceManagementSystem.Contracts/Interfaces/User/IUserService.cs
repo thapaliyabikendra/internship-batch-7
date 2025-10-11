@@ -13,5 +13,7 @@ public interface IUserService
 
     Task<ServiceResponseDto<IEnumerable<GetUserDto>>> GetAllAsync();
 
+    Task<ServiceResponseDto<PagedResponseDto<GetUserDto>>> GetListAsync(PagedRequestDto input);
+
     Task<ServiceResponseDto<GetUserDto>> GetByIdAsync(Guid id);
 }
